@@ -28,7 +28,8 @@
   --radius: 14px;
   --radius-lg: 28px;
   --shadow: 0 28px 80px rgb(29 54 108 / 0.13);
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 * { box-sizing: border-box; }
@@ -128,12 +129,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .nav-links a,
 .footer a,
 .text-link {
-  transition: color 300ms var(--ease), transform 300ms var(--ease);
+  transition: color 180ms var(--ease), transform 180ms var(--ease);
 }
-
-.nav-links a:hover,
-.footer a:hover,
-.text-link:hover { color: var(--brand); }
 
 .hero {
   min-height: calc(100dvh - 76px);
@@ -189,18 +186,16 @@ h1 {
   font-size: 0.92rem;
   font-weight: 650;
   white-space: nowrap;
-  transition: transform 350ms var(--ease), background 350ms var(--ease), border-color 350ms var(--ease), box-shadow 350ms var(--ease);
+  transition: transform 160ms var(--ease), background-color 200ms var(--ease), border-color 200ms var(--ease), box-shadow 200ms var(--ease);
 }
 
-.button:active { transform: scale(0.98); }
+.button:active { transform: scale(0.97); }
 .button.primary {
   color: #fff;
   background: var(--brand);
   box-shadow: 0 12px 32px rgb(52 84 209 / 0.22);
 }
-.button.primary:hover { transform: translateY(-2px); background: var(--brand-deep); }
 .button.secondary { color: var(--ink); border-color: var(--line-strong); background: var(--surface); }
-.button.secondary:hover { transform: translateY(-2px); border-color: var(--brand); color: var(--brand); }
 
 .identity-card {
   position: relative;
@@ -245,6 +240,17 @@ h1 {
   border: 1px solid rgb(255 255 255 / 0.21);
   border-radius: 50%;
   pointer-events: none;
+}
+.identity-orbit::after {
+  content: '';
+  position: absolute;
+  width: 0.48rem;
+  height: 0.48rem;
+  top: 50%;
+  right: -0.25rem;
+  border-radius: 50%;
+  background: var(--warm);
+  box-shadow: 0 0 0 0.32rem rgb(240 106 77 / 0.14);
 }
 .orbit-one { width: 22rem; height: 22rem; top: 4.3rem; left: 50%; transform: translateX(-50%); }
 .orbit-two { width: 15rem; height: 15rem; top: 7.8rem; left: 50%; transform: translateX(-50%); }
@@ -494,9 +500,8 @@ h2 {
   border: 1px solid rgb(255 255 255 / 0.2);
   border-radius: var(--radius-lg);
   background: rgb(255 255 255 / 0.1);
-  transition: transform 350ms var(--ease), background 350ms var(--ease), border-color 350ms var(--ease);
+  transition: transform 200ms var(--ease), background-color 200ms var(--ease), border-color 200ms var(--ease);
 }
-.contact-card:hover { transform: translateY(-3px); border-color: rgb(255 255 255 / 0.42); background: rgb(255 255 255 / 0.15); }
 .contact-card span { color: rgb(255 255 255 / 0.58); }
 .contact-card strong { display: block; margin-top: 0.5rem; color: #fff; font-size: clamp(1.4rem, 3vw, 2.55rem); font-weight: 590; line-height: 1.2; letter-spacing: -0.04em; overflow-wrap: anywhere; }
 .contact-meta { grid-column: 2; justify-content: space-between; gap: 1rem; color: rgb(255 255 255 / 0.62); font-size: 0.88rem; }
@@ -506,6 +511,82 @@ h2 {
 .footer nav { gap: 1.2rem; }
 
 :focus-visible { outline: 3px solid color-mix(in srgb, var(--warm) 72%, white); outline-offset: 4px; }
+
+/* Motion is progressive enhancement: content remains visible unless JS opts in. */
+.motion-ready [data-hero-copy] > *,
+.motion-ready [data-hero-card] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.motion-ready [data-hero-copy] > * {
+  transition: opacity 560ms var(--ease), transform 560ms var(--ease);
+}
+.motion-ready [data-hero-copy] > :nth-child(2) { transition-delay: 55ms; }
+.motion-ready [data-hero-copy] > :nth-child(3) { transition-delay: 110ms; }
+.motion-ready [data-hero-copy] > :nth-child(4) { transition-delay: 165ms; }
+.motion-ready [data-hero-card] {
+  transform: translateY(16px) scale(0.985);
+  transition: opacity 650ms var(--ease), transform 650ms var(--ease);
+  transition-delay: 120ms;
+}
+.motion-ready.hero-visible [data-hero-copy] > *,
+.motion-ready.hero-visible [data-hero-card] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.motion-ready.hero-visible .identity-mark span:first-child {
+  animation: identity-reveal-left 620ms 260ms var(--ease) both;
+}
+.motion-ready.hero-visible .identity-mark span:last-child {
+  animation: identity-reveal-right 620ms 315ms var(--ease) both;
+}
+.motion-ready.hero-visible .identity-card::after {
+  animation: accent-enter 480ms 440ms var(--ease) both;
+}
+.motion-ready.hero-visible .orbit-one { animation: orbit-clockwise 28s linear infinite; }
+.motion-ready.hero-visible .orbit-two { animation: orbit-counter 34s linear infinite; }
+
+.motion-ready .motion-group .motion-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 500ms var(--ease) calc(var(--motion-index, 0) * 50ms),
+    transform 500ms var(--ease) calc(var(--motion-index, 0) * 50ms);
+}
+.motion-ready .motion-group.is-visible .motion-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes identity-reveal-left {
+  from { opacity: 0; clip-path: inset(0 0 0 100%); transform: translateX(8px); }
+  to { opacity: 1; clip-path: inset(0); transform: translateX(0); }
+}
+@keyframes identity-reveal-right {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(-8px); }
+  to { opacity: 1; clip-path: inset(0); transform: translateX(0); }
+}
+@keyframes accent-enter {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 0.95; transform: scale(1); }
+}
+@keyframes orbit-clockwise {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+@keyframes orbit-counter {
+  from { transform: translateX(-50%) rotate(360deg); }
+  to { transform: translateX(-50%) rotate(0deg); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-links a:hover,
+  .footer a:hover,
+  .text-link:hover { color: var(--brand); }
+  .button.primary:hover { transform: translateY(-2px); background: var(--brand-deep); }
+  .button.secondary:hover { transform: translateY(-2px); border-color: var(--brand); color: var(--brand); }
+  .contact-card:hover { transform: translateY(-2px); border-color: rgb(255 255 255 / 0.42); background: rgb(255 255 255 / 0.15); }
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -582,8 +663,24 @@ h2 {
   .legal-panel dl div { grid-template-columns: 1fr; gap: 0.35rem; }
   .contact { margin-bottom: 0.5rem; padding: 2rem 1.25rem; border-radius: 1.6rem; }
   .contact-card { padding: 1.35rem; }
+  .motion-ready [data-hero-copy] > *,
+  .motion-ready [data-hero-card],
+  .motion-ready .motion-group .motion-item { transform: translateY(8px); }
+  .motion-ready.hero-visible [data-hero-copy] > *,
+  .motion-ready.hero-visible [data-hero-card],
+  .motion-ready .motion-group.is-visible .motion-item { transform: translateY(0) scale(1); }
+  .motion-ready.hero-visible .identity-orbit { animation-play-state: paused; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 100ms !important;
+    transition-delay: 0ms !important;
+  }
+  .motion-group .motion-item,
+  [data-hero-copy] > *,
+  [data-hero-card] { opacity: 1 !important; transform: none !important; }
 }
