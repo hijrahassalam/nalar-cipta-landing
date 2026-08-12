@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Nalar Cipta - Product Studio',
+  description = 'PT Nalar Cipta Teknologi is a registered technology company in Surakarta, Indonesia, building focused digital products including BundaGizi.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://nalarcipta.web.id').toString();
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'PT Nalar Cipta Teknologi',
+  legalName: 'NALAR CIPTA TEKNOLOGI',
+  alternateName: ['Nalar Cipta', 'NALAR CIPTA TEKNOLOGI'],
+  url: 'https://nalarcipta.web.id',
+  foundingDate: '2026-08-12',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Surakarta',
+    addressCountry: 'ID',
+  },
+  founder: {
+    '@type': 'Person',
+    name: 'Nur Hijrah As Salam Al Ihsan',
+  },
+  email: 'contact@nalarcipta.web.id',
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#3d4f5f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Nalar Cipta" />
+    <meta property="og:description" content="Registered technology company and product studio based in Surakarta, Indonesia." />
+    <meta property="og:url" content="https://nalarcipta.web.id/" />
+    <meta property="og:image" content="https://nalarcipta.web.id/og.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nalar Cipta" />
+    <meta name="twitter:description" content="Registered technology company and product studio based in Surakarta, Indonesia." />
+    <meta name="twitter:image" content="https://nalarcipta.web.id/og.svg" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organization)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
