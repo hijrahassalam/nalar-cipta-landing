@@ -66,11 +66,13 @@ const legalRows = [
       </div>
 
       <aside class="identity-card" aria-label="Company identity card">
+        <div class="identity-orbit orbit-one" aria-hidden="true"></div>
+        <div class="identity-orbit orbit-two" aria-hidden="true"></div>
         <div class="identity-topline">
           <span>Nalar Cipta</span>
           <span>Technology Company</span>
         </div>
-        <div class="identity-mark">NC</div>
+        <div class="identity-mark"><span>N</span><span>C</span></div>
         <div class="identity-list">
           <div>
             <span>Registered</span>
@@ -96,8 +98,9 @@ const legalRows = [
         <p>We build and operate focused software products from idea to everyday use.</p>
       </div>
       <div class="principle-grid">
-        {capabilities.map(([title, body]) => (
-          <article>
+        {capabilities.map(([title, body], index) => (
+          <article class={`capability capability-${index + 1}`}>
+            <span class="capability-index" aria-hidden="true">0{index + 1}</span>
             <h3>{title}</h3>
             <p>{body}</p>
           </article>
@@ -113,7 +116,7 @@ const legalRows = [
 
       <div class="product-grid">
         {products.map((product) => (
-          <article class={`product-card ${product.status === 'Live' ? 'is-live' : ''}`}>
+          <article class={`product-card ${product.status === 'Live' ? 'is-live' : 'is-development'}`}>
             <div class="card-head">
               <div>
                 <h3>{product.name}</h3>
