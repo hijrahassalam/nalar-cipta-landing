@@ -1,4 +1,6 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Nalar Cipta</title>
+  <desc id="desc">Thoughtful technology, built for real life.</desc>
   <rect width="1200" height="630" fill="#F6F7FA"/>
   <circle cx="1030" cy="116" r="240" fill="#DCE4FF"/>
   <circle cx="1112" cy="574" r="124" fill="#F06A4D"/>
@@ -7,10 +9,10 @@
   <circle cx="932" cy="314" r="142" stroke="#6F88FF" stroke-width="2"/>
   <text x="118" y="146" font-family="Geologica, Arial, sans-serif" font-size="25" font-weight="600" fill="#9BAFFF" letter-spacing="4">PT NALAR CIPTA TEKNOLOGI</text>
   <text x="116" y="282" font-family="Geologica, Arial, sans-serif" font-size="82" font-weight="620" fill="#FFFFFF">Nalar Cipta</text>
-  <text x="120" y="351" font-family="Geologica, Arial, sans-serif" font-size="30" font-weight="400" fill="#C8D2E6">Focused digital products for everyday needs.</text>
+  <text x="120" y="351" font-family="Geologica, Arial, sans-serif" font-size="30" font-weight="400" fill="#C8D2E6">Thoughtful technology, built for real life.</text>
   <text x="120" y="486" font-family="Geologica, Arial, sans-serif" font-size="22" font-weight="500" fill="#AEB9CC">Registered Indonesian technology company</text>
-  <rect x="846" y="228" width="172" height="172" rx="38" fill="#3454D1" stroke="white" stroke-opacity="0.28"/>
-  <path d="M846 314H1018" stroke="white" stroke-opacity="0.22"/>
-  <path d="M932 228V400" stroke="white" stroke-opacity="0.22"/>
-  <text x="880" y="337" font-family="Geologica, Arial, sans-serif" font-size="64" font-weight="620" fill="#FFFFFF">NC</text>
+  <g transform="translate(860 242) scale(1.14)">
+    <path d="M49 12C54.6 6.4 60 10.4 60 18.3V43.8C60 48.3 58.2 52.6 55 55.8L45 65.8C42.7 68.1 42.7 71.9 45 74.2L55 84.2C58.2 87.4 60 91.7 60 96.2V109.7C60 118 50 122.1 44.1 116.2L15.6 87.7C1.6 73.7 1.6 51.3 15.6 37.3L49 12Z" fill="#FFFFFF"/>
+    <path d="M79 12C73.4 6.4 68 10.4 68 18.3V43.8C68 48.3 69.8 52.6 73 55.8L83 65.8C85.3 68.1 85.3 71.9 83 74.2L73 84.2C69.8 87.4 68 91.7 68 96.2V109.7C68 118 78 122.1 83.9 116.2L112.4 87.7C126.4 73.7 126.4 51.3 112.4 37.3L79 12Z" fill="#F06A4D"/>
+  </g>
 </svg>

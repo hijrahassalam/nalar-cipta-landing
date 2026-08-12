@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Nalar Cipta corner orbit</title>
+  <circle cx="480" cy="0" r="360" stroke="#17233B" stroke-opacity="0.08" stroke-width="2"/>
+  <circle cx="480" cy="0" r="278" stroke="#3454D1" stroke-opacity="0.22" stroke-width="3"/>
+  <circle cx="480" cy="0" r="194" stroke="#3454D1" stroke-opacity="0.5" stroke-width="3"/>
+  <path d="M177.4 194.6C213.8 251.1 268 296.7 332.1 321.8" stroke="#F06A4D" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="177" cy="195" r="11" fill="#F06A4D"/>
+  <circle cx="332" cy="322" r="7" fill="#F06A4D"/>
+  <circle cx="286" cy="0" r="8" fill="#3454D1"/>
+</svg>

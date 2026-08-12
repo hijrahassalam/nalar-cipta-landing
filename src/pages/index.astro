@@ -40,7 +40,7 @@ const legalRows = [
 <Base>
   <header class="site-header" aria-label="Main navigation">
     <a class="brand" href="#top" aria-label="Nalar Cipta home">
-      <span class="brand-mark">NC</span>
+      <img class="brand-mark" src="/brand/logos/mark-full-color.svg" alt="" width="40" height="40" />
       <span>Nalar Cipta</span>
     </a>
     <nav class="nav-links" aria-label="Page sections">
@@ -59,6 +59,7 @@ const legalRows = [
         <p class="hero-lede">
           Nalar Cipta is a registered Indonesian technology company building practical, domain-focused software.
         </p>
+        <p class="brand-tagline">Thoughtful technology, built for real life.</p>
         <div class="hero-actions" aria-label="Primary actions">
           <a class="button primary" href="#products">View products</a>
           <a class="button secondary" href="#company">Company details</a>
@@ -72,7 +73,10 @@ const legalRows = [
           <span>Nalar Cipta</span>
           <span>Technology Company</span>
         </div>
-        <div class="identity-mark"><span>N</span><span>C</span></div>
+        <svg class="identity-mark" viewBox="0 0 128 128" aria-hidden="true" focusable="false">
+          <path class="identity-half identity-half-nalar" d="M49 12C54.6 6.4 60 10.4 60 18.3V43.8C60 48.3 58.2 52.6 55 55.8L45 65.8C42.7 68.1 42.7 71.9 45 74.2L55 84.2C58.2 87.4 60 91.7 60 96.2V109.7C60 118 50 122.1 44.1 116.2L15.6 87.7C1.6 73.7 1.6 51.3 15.6 37.3L49 12Z" />
+          <path class="identity-half identity-half-cipta" d="M79 12C73.4 6.4 68 10.4 68 18.3V43.8C68 48.3 69.8 52.6 73 55.8L83 65.8C85.3 68.1 85.3 71.9 83 74.2L73 84.2C69.8 87.4 68 91.7 68 96.2V109.7C68 118 78 122.1 83.9 116.2L112.4 87.7C126.4 73.7 126.4 51.3 112.4 37.3L79 12Z" />
+        </svg>
         <div class="identity-list">
           <div>
             <span>Registered</span>
@@ -193,7 +197,10 @@ const legalRows = [
   </main>
 
   <footer class="footer section-wrap">
-    <p>© 2026 PT Nalar Cipta Teknologi</p>
+    <div class="footer-brand">
+      <img src="/brand/logos/mark-full-color.svg" alt="" width="32" height="32" />
+      <p>© 2026 PT Nalar Cipta Teknologi</p>
+    </div>
     <nav aria-label="Footer links">
       <a href="#products">Products</a>
       <a href="#company">Company</a>
