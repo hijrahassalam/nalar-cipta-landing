@@ -22,24 +22,18 @@ const products = [
   },
 ];
 
-const principles = [
-  ['Focused use cases', 'Each product is built around one clear job, not a long list of loosely related features.'],
-  ['Everyday channels', 'We prefer interfaces people already use, like WhatsApp, when that reduces friction.'],
-  ['Domain-specific assistance', 'We build products with context, memory, and domain boundaries instead of generic chat wrappers.'],
-  ['Responsible scope', 'Health-related tools must be helpful, clear, and honest about what they can and cannot replace.'],
+const capabilities = [
+  ['Build focused products', 'We turn specific everyday needs into software with a clear purpose and audience.'],
+  ['Operate what we build', 'We improve products through real usage, practical feedback, and continuous iteration.'],
+  ['Design for familiar channels', 'We use interfaces people already understand, including WhatsApp, when that makes a product easier to use.'],
+  ['Work within clear boundaries', 'We define each product’s scope carefully, especially in health-related contexts.'],
 ];
 
 const legalRows = [
-  ['Legal name', 'NALAR CIPTA TEKNOLOGI'],
-  ['Public name', 'Nalar Cipta / PT Nalar Cipta Teknologi'],
-  ['Legal form', 'Perseroan Perorangan - Indonesian sole-shareholder limited liability company'],
-  ['Business scale', 'Micro Enterprise'],
+  ['Registered name', 'NALAR CIPTA TEKNOLOGI'],
+  ['Public name', 'PT Nalar Cipta Teknologi'],
   ['Registration', 'AHU-A112793.AH.01.30.Tahun 2026'],
-  ['Established', '12 August 2026'],
-  ['Domicile', 'Surakarta, Indonesia'],
-  ['Founder', 'Nur Hijrah As Salam Al Ihsan'],
-  ['Products', 'BundaGizi (live), AsistenDiet (in development)'],
-  ['Website', 'https://nalarcipta.web.id'],
+  ['Established', '2026, Indonesia'],
 ];
 ---
 
@@ -50,9 +44,8 @@ const legalRows = [
       <span>Nalar Cipta</span>
     </a>
     <nav class="nav-links" aria-label="Page sections">
+      <a href="#what-we-do">What we do</a>
       <a href="#products">Products</a>
-      <a href="#about">About</a>
-      <a href="#approach">Approach</a>
       <a href="#company">Company</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -62,9 +55,9 @@ const legalRows = [
     <section class="hero section-wrap">
       <div class="hero-copy">
         <p class="kicker">PT Nalar Cipta Teknologi</p>
-        <h1>Building and operating focused digital products.</h1>
+        <h1>We build focused digital products for everyday needs.</h1>
         <p class="hero-lede">
-          Nalar Cipta is a registered technology company based in Surakarta, Indonesia. We build practical products for daily life, starting with BundaGizi.
+          Nalar Cipta is a registered Indonesian technology company building practical, domain-focused software.
         </p>
         <div class="hero-actions" aria-label="Primary actions">
           <a class="button primary" href="#products">View products</a>
@@ -75,7 +68,7 @@ const legalRows = [
       <aside class="identity-card" aria-label="Company identity card">
         <div class="identity-topline">
           <span>Nalar Cipta</span>
-          <span>Product Studio</span>
+          <span>Technology Company</span>
         </div>
         <div class="identity-mark">NC</div>
         <div class="identity-list">
@@ -94,13 +87,28 @@ const legalRows = [
     <section class="entity section-wrap" aria-label="Entity snapshot">
       <p>Registered Indonesian company</p>
       <strong>NALAR CIPTA TEKNOLOGI</strong>
-      <span>AHU-A112793.AH.01.30.Tahun 2026 / Surakarta / Est. 2026</span>
+      <span>AHU-A112793.AH.01.30.Tahun 2026 / Est. 2026</span>
+    </section>
+
+    <section class="section-wrap approach" id="what-we-do">
+      <div class="section-heading">
+        <h2>What we do</h2>
+        <p>We build and operate focused software products from idea to everyday use.</p>
+      </div>
+      <div class="principle-grid">
+        {capabilities.map(([title, body]) => (
+          <article>
+            <h3>{title}</h3>
+            <p>{body}</p>
+          </article>
+        ))}
+      </div>
     </section>
 
     <section class="section-wrap products" id="products">
       <div class="section-heading compact">
-        <h2>Products under Nalar Cipta</h2>
-        <p>Products under Nalar Cipta are built as independent brands, each with a clear audience and scope.</p>
+        <h2>Products we build and operate</h2>
+        <p>Each product has an independent identity, a clear audience, and a focused scope.</p>
       </div>
 
       <div class="product-grid">
@@ -133,12 +141,11 @@ const legalRows = [
 
     <section class="about section-wrap" id="about">
       <div class="about-title">
-        <h2>A focused product studio from Surakarta.</h2>
+        <h2>About Nalar Cipta</h2>
       </div>
       <div class="about-body">
-        <p>Nalar Cipta turns specific daily problems into simple, reliable software.</p>
-        <p>We build deliberately: one focused product at a time, with real usage as the measure of progress.</p>
-        <p>Our work today centers on health and daily routines, areas where clarity, trust, and consistency matter more than hype.</p>
+        <p>Nalar Cipta turns specific everyday needs into focused, practical software.</p>
+        <p>We build and operate one product at a time, prioritizing clarity, usefulness, and responsible scope.</p>
         <div class="chip-row" aria-label="Product principles">
           <span>Focused</span>
           <span>Practical</span>
@@ -147,25 +154,10 @@ const legalRows = [
       </div>
     </section>
 
-    <section class="section-wrap approach" id="approach">
-      <div class="section-heading">
-        <h2>What guides our products</h2>
-        <p>Our craft is product work, not slide decks.</p>
-      </div>
-      <div class="principle-grid">
-        {principles.map(([title, body]) => (
-          <article>
-            <h3>{title}</h3>
-            <p>{body}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-
     <section class="company section-wrap" id="company">
       <div class="section-heading compact">
-        <h2>Legal identity</h2>
-        <p>Official company details for verification, partnership, and compliance.</p>
+        <h2>Company information</h2>
+        <p>Basic registration details for public verification.</p>
       </div>
       <div class="legal-panel">
         <dl>
@@ -176,8 +168,8 @@ const legalRows = [
             </div>
           ))}
         </dl>
-        <p class="legal-note">Terdaftar sebagai Perseroan Perorangan di Indonesia.</p>
-        <p class="legal-note muted">This page is the public corporate presence of PT Nalar Cipta Teknologi.</p>
+        <p class="legal-note">Registered company in Indonesia.</p>
+        <p class="legal-note muted">Additional documents are provided privately when required for formal verification.</p>
       </div>
     </section>
 
