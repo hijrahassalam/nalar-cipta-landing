@@ -119,6 +119,49 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-weight: 500;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.85rem, 2vw, 1.35rem);
+  min-width: 0;
+}
+
+.theme-toggle {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: inline-grid;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  cursor: pointer;
+  transition:
+    color 160ms var(--ease),
+    border-color 160ms var(--ease),
+    background-color 160ms var(--ease),
+    transform 160ms var(--ease);
+}
+.theme-toggle-icon {
+  display: none;
+  line-height: 0;
+}
+html[data-theme="light"] .theme-toggle-icon-moon,
+html:not([data-theme]) .theme-toggle-icon-moon {
+  display: block;
+}
+html[data-theme="dark"] .theme-toggle-icon-sun {
+  display: block;
+}
+/* Before FOUC script: prefer system */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) .theme-toggle-icon-moon { display: none; }
+  html:not([data-theme]) .theme-toggle-icon-sun { display: block; }
+}
+
 .nav-links a,
 .footer a,
 .text-link {
@@ -618,10 +661,16 @@ h2 {
   .button.primary:hover { transform: translateY(-2px); background: var(--brand-deep); }
   .button.secondary:hover { transform: translateY(-2px); border-color: var(--brand); color: var(--brand); }
   .contact-card:hover { transform: translateY(-2px); border-color: rgb(255 255 255 / 0.42); background: rgb(255 255 255 / 0.15); }
+  .theme-toggle:hover {
+    transform: translateY(-1px);
+    border-color: var(--brand);
+    color: var(--brand);
+  }
 }
 
+/* Dark theme via system preference unless user forced light. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0f1729;
     --surface: #17233b;
     --surface-raised: #1c2a46;
@@ -641,22 +690,76 @@ h2 {
     --live-soft: #203f37;
     --shadow: 0 30px 90px rgb(0 0 0 / 0.3);
   }
-  body { font-weight: 390; }
-  .site-header { background: color-mix(in srgb, var(--bg) 88%, transparent); }
-  .button.primary { color: #fff; background: #526fe9; }
-  .button.secondary { background: var(--surface); }
-  .identity-card { background: radial-gradient(circle at 20% 8%, rgb(111 136 255 / 0.72), transparent 28%), linear-gradient(145deg, #3454d1 0%, #243da8 48%, #101a2e 100%); }
-  .principle-grid .capability-1 { background: #3454d1; }
-  .product-card.is-live { border-color: #315d50; background: linear-gradient(145deg, #19352f, #172c2a); }
-  .is-live .status-pill { color: #b8ead7; background: #285145; }
-  .legal-panel { background: #0a1120; }
-  .contact { background: radial-gradient(circle at 86% 22%, rgb(99 126 255 / 0.75), transparent 25%), linear-gradient(135deg, #101a2e, #243da8); }
+  html:not([data-theme="light"]) body { font-weight: 390; }
+  html:not([data-theme="light"]) .site-header { background: color-mix(in srgb, var(--bg) 88%, transparent); }
+  html:not([data-theme="light"]) .button.primary { color: #fff; background: #526fe9; }
+  html:not([data-theme="light"]) .button.secondary { background: var(--surface); }
+  html:not([data-theme="light"]) .identity-card { background: radial-gradient(circle at 20% 8%, rgb(111 136 255 / 0.72), transparent 28%), linear-gradient(145deg, #3454d1 0%, #243da8 48%, #101a2e 100%); }
+  html:not([data-theme="light"]) .principle-grid .capability-1 { background: #3454d1; }
+  html:not([data-theme="light"]) .product-card.is-live { border-color: #315d50; background: linear-gradient(145deg, #19352f, #172c2a); }
+  html:not([data-theme="light"]) .is-live .status-pill { color: #b8ead7; background: #285145; }
+  html:not([data-theme="light"]) .legal-panel { background: #0a1120; }
+  html:not([data-theme="light"]) .contact { background: radial-gradient(circle at 86% 22%, rgb(99 126 255 / 0.75), transparent 25%), linear-gradient(135deg, #101a2e, #243da8); }
+}
+
+html[data-theme="dark"] {
+  --bg: #0f1729;
+  --surface: #17233b;
+  --surface-raised: #1c2a46;
+  --surface-mineral: #23324f;
+  --surface-blue: #1d2b53;
+  --ink: #e9eef8;
+  --ink-strong: #f7f9ff;
+  --muted: #aeb9cc;
+  --line: #31415f;
+  --line-strong: #4a5b7d;
+  --brand: #6f88ff;
+  --brand-deep: #9bafff;
+  --brand-soft: #263b77;
+  --warm: #ff8066;
+  --warm-soft: #4e2a2b;
+  --live: #7ec3a7;
+  --live-soft: #203f37;
+  --shadow: 0 30px 90px rgb(0 0 0 / 0.3);
+}
+html[data-theme="dark"] body { font-weight: 390; }
+html[data-theme="dark"] .site-header { background: color-mix(in srgb, var(--bg) 88%, transparent); }
+html[data-theme="dark"] .button.primary { color: #fff; background: #526fe9; }
+html[data-theme="dark"] .button.secondary { background: var(--surface); }
+html[data-theme="dark"] .identity-card { background: radial-gradient(circle at 20% 8%, rgb(111 136 255 / 0.72), transparent 28%), linear-gradient(145deg, #3454d1 0%, #243da8 48%, #101a2e 100%); }
+html[data-theme="dark"] .principle-grid .capability-1 { background: #3454d1; }
+html[data-theme="dark"] .product-card.is-live { border-color: #315d50; background: linear-gradient(145deg, #19352f, #172c2a); }
+html[data-theme="dark"] .is-live .status-pill { color: #b8ead7; background: #285145; }
+html[data-theme="dark"] .legal-panel { background: #0a1120; }
+html[data-theme="dark"] .contact { background: radial-gradient(circle at 86% 22%, rgb(99 126 255 / 0.75), transparent 25%), linear-gradient(135deg, #101a2e, #243da8); }
+
+/* Explicit light wins over system dark when user toggles. */
+html[data-theme="light"] {
+  --bg: #f6f7fa;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-mineral: #dde6f3;
+  --surface-blue: #e9edff;
+  --ink: #17233b;
+  --ink-strong: #101a2e;
+  --muted: #5c667a;
+  --line: #cfd8e7;
+  --line-strong: #aebbd0;
+  --brand: #3454d1;
+  --brand-deep: #243da8;
+  --brand-soft: #dce4ff;
+  --warm: #f06a4d;
+  --warm-soft: #ffe1d8;
+  --live: #2d7259;
+  --live-soft: #dff2e9;
+  --shadow: 0 28px 80px rgb(29 54 108 / 0.13);
 }
 
 @media (max-width: 920px) {
   .site-header, .section-wrap { width: min(100% - 32px, 1180px); }
   .site-header { min-height: auto; padding-block: 1rem; align-items: flex-start; flex-direction: column; gap: 0.85rem; }
-  .nav-links { width: 100%; gap: 1rem; overflow-x: auto; padding-bottom: 0.15rem; }
+  .header-actions { width: 100%; justify-content: space-between; gap: 0.75rem; }
+  .nav-links { flex: 1; min-width: 0; gap: 1rem; overflow-x: auto; padding-bottom: 0.15rem; }
   .hero, .product-grid, .about { grid-template-columns: 1fr; }
   .hero { min-height: auto; padding-top: 4.25rem; }
   h1 { max-width: 14ch; font-size: clamp(3rem, 12vw, 4.8rem); }

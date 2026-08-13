@@ -43,12 +43,33 @@ const legalRows = [
       <img class="brand-mark" src="/brand/logos/mark-full-color.svg" alt="" width="40" height="40" />
       <span>Nalar Cipta</span>
     </a>
-    <nav class="nav-links" aria-label="Page sections">
-      <a href="#what-we-do">What we do</a>
-      <a href="#products">Products</a>
-      <a href="#company">Company</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="header-actions">
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#what-we-do">What we do</a>
+        <a href="#products">Products</a>
+        <a href="#company">Company</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button
+        type="button"
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="Switch to dark mode"
+        title="Toggle light / dark mode"
+      >
+        <span class="theme-toggle-icon theme-toggle-icon-sun" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2.5v2.2M12 19.3v2.2M4.5 12H2.3M21.7 12h-2.2M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" />
+          </svg>
+        </span>
+        <span class="theme-toggle-icon theme-toggle-icon-moon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.5 14.2A8.2 8.2 0 0 1 9.8 3.5 8.4 8.4 0 1 0 20.5 14.2Z" />
+          </svg>
+        </span>
+      </button>
+    </div>
   </header>
 
   <main id="top">
@@ -215,6 +236,55 @@ const legalRows = [
   <script is:inline>
     (() => {
       const root = document.documentElement;
+      const THEME_KEY = 'nc-theme';
+
+      const systemTheme = () =>
+        window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+      const resolveTheme = () => {
+        try {
+          const stored = localStorage.getItem(THEME_KEY);
+          if (stored === 'light' || stored === 'dark') return stored;
+        } catch (_) {}
+        return systemTheme();
+      };
+
+      const applyTheme = (theme) => {
+        root.setAttribute('data-theme', theme);
+        root.style.colorScheme = theme;
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0f1729' : '#f6f7fa');
+
+        const btn = document.getElementById('theme-toggle');
+        if (btn) {
+          const next = theme === 'dark' ? 'light' : 'dark';
+          btn.setAttribute('aria-label', `Switch to ${next} mode`);
+          btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+          btn.title = `Theme: ${theme} (click for ${next})`;
+        }
+      };
+
+      applyTheme(resolveTheme());
+
+      const toggle = document.getElementById('theme-toggle');
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const next = resolveTheme() === 'dark' ? 'light' : 'dark';
+          try { localStorage.setItem(THEME_KEY, next); } catch (_) {}
+          applyTheme(next);
+        });
+      }
+
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      const onSystemChange = () => {
+        try {
+          if (localStorage.getItem(THEME_KEY) === 'light' || localStorage.getItem(THEME_KEY) === 'dark') return;
+        } catch (_) {}
+        applyTheme(systemTheme());
+      };
+      if (typeof mq.addEventListener === 'function') mq.addEventListener('change', onSystemChange);
+      else if (typeof mq.addListener === 'function') mq.addListener(onSystemChange);
+
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       if (reduceMotion || !('IntersectionObserver' in window)) {
